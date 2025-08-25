@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metode Pembayaran - KellStore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center" 
+      style="background: url('bg.jpg') no-repeat center center fixed; background-size: cover;">
+
+  <!-- CARD -->
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow-xl max-w-lg w-full">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Metode Pembayaran</h1>
+    
+    <!-- Dana -->
+    <div class="mb-6 border p-4 rounded-xl bg-blue-50">
+      <h2 class="text-xl font-semibold text-blue-600 mb-2">DANA</h2>
+      <p class="text-gray-700">Nomor: 
+        <span id="danaNumber" class="font-mono font-bold">0887437005918</span>
+      </p>
+      <p class="text-gray-700">Atas Nama: <span class="font-semibold">KIKI A*****SYAH</span></p>
+      <button onclick="copyToClipboard('danaNumber')" 
+              class="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-lg text-sm">
+        Salin Nomor
+      </button>
+    </div>
+    
+    <!-- GoPay -->
+    <div class="mb-6 border p-4 rounded-xl bg-green-50">
+      <h2 class="text-xl font-semibold text-green-600 mb-2">GoPay</h2>
+      <p class="text-gray-700">Nomor: 
+        <span id="gopayNumber" class="font-mono font-bold">085769434211</span>
+      </p>
+      <p class="text-gray-700">Atas Nama: <span class="font-semibold">KELL</span></p>
+      <button onclick="copyToClipboard('gopayNumber')" 
+              class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-lg text-sm">
+        Salin Nomor
+      </button>
+    </div>
+
+    <!-- QRIS -->
+    <div class="mb-6 border p-4 rounded-xl bg-purple-50 text-center">
+      <h2 class="text-xl font-semibold text-purple-600 mb-2">QRIS (All Payment)</h2>
+      <p class="text-gray-700 text-sm mb-3">
+        Untuk pembayaran via QRIS, silakan minta langsung ke admin.
+      </p>
+      <a href="https://t.me/Kellajalh" target="_blank" 
+         class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow">
+        Minta QRIS ke Admin
+      </a>
+    </div>
+
+    <!-- Konfirmasi -->
+    <div class="text-center space-y-2">
+      <p class="text-gray-700">Setelah transfer, lakukan konfirmasi pembayaran:</p>
+      <a href="https://wa.me/6285134229334" target="_blank" 
+         class="block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow">
+        Konfirmasi via WhatsApp
+      </a>
+      <a href="https://t.me/Kellajalh" target="_blank" 
+         class="block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow">
+        Konfirmasi via Telegram
+      </a>
+    </div>
+  </div>
+
+  <!-- Script Copy -->
+  <script>
+    function copyToClipboard(id) {
+      const text = document.getElementById(id).innerText;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        // Metode modern (butuh HTTPS / localhost)
+        navigator.clipboard.writeText(text).then(() => {
+          alert("Nomor berhasil disalin: " + text);
+        }).catch(err => {
+          fallbackCopy(text);
+        });
+      } else {
+        // fallback kalau bukan https
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const tempInput = document.createElement("textarea");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999); // untuk HP
+      const success = document.execCommand("copy");
+
+      document.body.removeChild(tempInput);
+
+      if (success) {
+        alert("Nomor berhasil disalin: " + text);
+      } else {
+        alert("Gagal menyalin nomor, silakan salin manual.");
+      }
+    }
+  </script>
+
+</body>
+</html>
